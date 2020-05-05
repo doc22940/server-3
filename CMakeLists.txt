@@ -224,6 +224,8 @@ IF (WITH_MSAN)
   MY_CHECK_AND_SET_COMPILER_FLAG("-fsanitize=memory -fsanitize-memory-track-origins -U_FORTIFY_SOURCE" DEBUG RELWITHDEBINFO)
 ENDIF()
 
+MY_CHECK_AND_SET_COMPILER_FLAG("-Wno-unused-command-line-argument")
+
 # enable security hardening features, like most distributions do
 # in our benchmarks that costs about ~1% of performance, depending on the load
 IF(CMAKE_C_COMPILER_VERSION VERSION_LESS "4.6" OR WITH_ASAN OR WITH_UBSAN)
