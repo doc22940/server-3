@@ -114,12 +114,15 @@ SET(ignored
   "%ignore ${CMAKE_INSTALL_PREFIX}/lib/systemd"
   "%ignore ${CMAKE_INSTALL_PREFIX}/lib/systemd/system"
   "%ignore ${CMAKE_INSTALL_PREFIX}/lib/tmpfiles.d"
+  "%ignore ${CMAKE_INSTALL_PREFIX}/lib/sysusers.d"
   "%ignore ${CMAKE_INSTALL_PREFIX}/lib64"
   "%ignore ${CMAKE_INSTALL_PREFIX}/sbin"
   "%ignore ${CMAKE_INSTALL_PREFIX}/share"
   "%ignore ${CMAKE_INSTALL_PREFIX}/share/aclocal"
   "%ignore ${CMAKE_INSTALL_PREFIX}/share/doc"
   "%ignore ${CMAKE_INSTALL_PREFIX}/share/man"
+  "%ignore ${CMAKE_INSTALL_PREFIX}/share/man/man1"
+  "%ignore ${CMAKE_INSTALL_PREFIX}/share/man/man8"
   "%ignore ${CMAKE_INSTALL_PREFIX}/share/man/man1*"
   "%ignore ${CMAKE_INSTALL_PREFIX}/share/man/man8*"
   "%ignore ${CMAKE_INSTALL_PREFIX}/share/pkgconfig"
@@ -235,6 +238,7 @@ ELSEIF(RPM MATCHES "(rhel|centos)8")
   ALTERNATIVE_NAME("shared" "mariadb-connector-c-config" ${MARIADB_CONNECTOR_C_VERSION}-1)
   SETA(CPACK_RPM_client_PACKAGE_PROVIDES "mariadb-galera = 3:%{version}-%{release}")
   SETA(CPACK_RPM_common_PACKAGE_PROVIDES "mariadb-galera-common = 3:%{version}-%{release}")
+  SETA(CPACK_RPM_common_PACKAGE_CONFLICTS "mariadb-connector-c-config")
 ENDIF()
 IF(RPM MATCHES "fedora31" OR RPM MATCHES "(rhel|centos)8")
   SET(PYTHON_SHEBANG "/usr/bin/python3" CACHE STRING "python shebang")
