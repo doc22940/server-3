@@ -4364,7 +4364,12 @@ handle_table(THD *thd, Query_tables_list *prelocking_ctx,
          || (op & (1 << TRG_EVENT_UPDATE) && can_write[fk->update_method]))
           lock_type= TL_WRITE_ALLOW_WRITE;
         else
+        {
+          // And as long as InnoDB takes proper locks, we don't need to prelock
+          // tables for read access
           lock_type= TL_READ;
+          continue;
+        }
 
         if (table_already_fk_prelocked(prelocking_ctx->query_tables,
                                        fk->foreign_db, fk->foreign_table,
